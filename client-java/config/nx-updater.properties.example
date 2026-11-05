@@ -1,0 +1,8 @@
+# NX GAMES control repository. Must remain private.
+repository=Nintenlaxu/NX-Updater
+# Public GitHub Releases distribution repository; intentionally pending.
+# A private control repository cannot serve anonymous installations.
+distributionRepository=
+channel=DEVELOPMENT
+# Add only the publisher public key to config/trusted-release-key.pem.
+# Never place tokens or private keys in the game.
