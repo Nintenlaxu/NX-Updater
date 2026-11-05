@@ -1,0 +1,19 @@
+# No subir secretos ni binarios sin revisión
+.env
+.env.*
+!.env.example
+secrets/
+private-keys/
+*.pem
+*.p12
+*.pfx
+*.key
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+Thumbs.db
+dist/
+build/
+*.tmp
+*.part
