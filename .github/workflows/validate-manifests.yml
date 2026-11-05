@@ -1,0 +1,24 @@
+name: Validate NX Updater manifests
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check JSON manifests
+        run: python3 tools/validate_manifest.py manifests/stable.json manifests/beta.json
+      - name: Run unit tests
+        run: python3 -m unittest discover -s tests -v
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile client and run signed update regression
+        run: python3 client-java/build.py
+      - name: Check publisher compatibility with client
+        run: python3 tools/check_client_contract.py
