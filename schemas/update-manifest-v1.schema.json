@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nx-games:nx-updater:update-manifest-v1",
+  "title": "NX Updater update manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "app_id",
+    "publisher",
+    "channel",
+    "generated_at",
+    "releases"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "app_id": {
+      "const": "street-cbtis4-fighters"
+    },
+    "publisher": {
+      "const": "NX GAMES"
+    },
+    "channel": {
+      "enum": [
+        "stable",
+        "beta"
+      ]
+    },
+    "generated_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "releases": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pc-java-windows": {
+          "$ref": "#/$defs/release"
+        },
+        "pc-cpp-windows": {
+          "$ref": "#/$defs/release"
+        },
+        "xbox360": {
+          "$ref": "#/$defs/release"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "release": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "url",
+        "sha256",
+        "size_bytes",
+        "notes",
+        "minimum_updater_version"
+      ],
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[a-zA-Z0-9.-]+)?$"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 4000
+        },
+        "minimum_updater_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        }
+      }
+    }
+  }
+}
